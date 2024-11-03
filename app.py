@@ -16,6 +16,13 @@ r = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password,
 
 senha_gerada_counter = Counter('senha_gerada', 'Contador de senhas geradas')
 
+try:
+    r.ping()
+    print("Conectado ao Redis com sucesso!")
+except redis.ConnectionError:
+    print("Não foi possível conectar ao Redis.")
+
+
 
 def criar_senha(tamanho, incluir_numeros, incluir_caracteres_especiais):
     caracteres = string.ascii_letters
